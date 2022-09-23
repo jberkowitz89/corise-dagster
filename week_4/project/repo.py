@@ -1,3 +1,4 @@
+# pyright: reportMissingImports=false
 from dagster import repository, with_resources
 from dagster_dbt import dbt_cli_resource
 from project.dbt_config import DBT_PROJECT_PATH
@@ -7,8 +8,9 @@ from project.week_4 import (
     process_data_docker,
     put_redis_data_docker,
 )
-from project.week_4_challenge import create_dbt_table, insert_dbt_data
-
+from project.week_4_challenge import (
+    create_dbt_table_docker, dbt_table_docker, dbt_assets, final
+)
 
 @repository
 def repo():
@@ -17,4 +19,4 @@ def repo():
 
 @repository
 def assets_dbt():
-    pass
+    return [create_dbt_table_docker, dbt_table_docker, final, *dbt_assets]
